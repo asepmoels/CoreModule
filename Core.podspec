@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "Core"
-  spec.version      = "0.0.4"
+  spec.version      = "0.0.6"
   spec.summary      = "Core module for modularization xcode project"
 
   # This description is used to generate tags and improve search results.
@@ -138,6 +138,7 @@ Core module for modularizaton xcode project with cocoapods
   spec.dependency "RxCocoa", "6.1.0"
   spec.dependency "Alamofire"
   spec.dependency "ObjectMapper", "4.2.0"
+  spec.dependency "ObjectMapper+Realm"
   spec.swift_version = "5.1"
 
 end
