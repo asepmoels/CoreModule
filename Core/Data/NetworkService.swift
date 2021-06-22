@@ -16,10 +16,11 @@ public class NetworkService {
   public func connect<T: Mappable>(api: URL, responseType: T.Type) -> Observable<T> {
     let subject = ReplaySubject<T>.createUnbounded()
     AF.request(api.absoluteString)
-      .responseJSON { (response) in
+      .responseData { (response) in
         switch response.result {
-        case .success(let json):
-          if let data = json as? [String: Any] {
+        case .success(let data):
+          if let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments),
+             let data = json as? [String: Any] {
             let map = Map(mappingType: .fromJSON, JSON: data)
             if let object = responseType.init(map: map) {
               subject.onNext(object)
