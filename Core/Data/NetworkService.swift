@@ -7,8 +7,8 @@
 
 import Foundation
 import ObjectMapper
-import Alamofire
 import RxSwift
+import Alamofire
 
 public class NetworkService {
   public static let shared = NetworkService()
@@ -21,8 +21,7 @@ public class NetworkService {
         case .success(let data):
           if let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments),
              let data = json as? [String: Any] {
-            let map = Map(mappingType: .fromJSON, JSON: data)
-            if let object = responseType.init(map: map) {
+            if let object = Mapper<T>().map(JSON: data) {
               subject.onNext(object)
               subject.onCompleted()
             } else {
